@@ -1,0 +1,6 @@
+.DS_Store
+.envrc
+v2_PrivateKey.pem
+v3_PrivateKey.pem
+.venv/
+.vscode/
