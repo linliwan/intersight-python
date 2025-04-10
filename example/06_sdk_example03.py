@@ -1,6 +1,10 @@
 """
-Customized query with intersight api
-https://intersight.com/apidocs/introduction/query/
+    Customized query with intersight api
+    In this case, we find the FI associated with the domain by the name of the ucs domain, 
+    then traverse all the ports of the FI, find the moid of the device connected to the other end (the io card in the chassis), 
+    then find the chassis information, and finally list all the blade information in the chassis.
+    This case allows us to get in touch with multiple APIs of Intersight and become familiar with their usage.
+    Author: Linlin Wang
 """
 import os
 import intersight.apis

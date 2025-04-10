@@ -1,5 +1,6 @@
 """
-source: https://github.com/CiscoDevNet/intersight-python-utils
+    A time series example from Cisco Devnet
+    source: https://github.com/CiscoDevNet/intersight-python-utils
 """
 
 import logging

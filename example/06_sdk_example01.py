@@ -1,7 +1,9 @@
 """
-Customized query with intersight api
-https://intersight.com/apidocs/introduction/query/
+    A minimal code example using the intersight python SDK
+    Customized query with intersight api
+    Author: Linlin Wang
 """
+
 import os
 import intersight.apis
 import intersight.authentication
@@ -13,6 +15,9 @@ PRIVATE_KEY_FILE = os.getenv("METRIC_API_PRIVATE_KEY_V3")
 client = intersight.authentication.get_api_client(api_key_id=API_KEY_ID, api_secret_file=PRIVATE_KEY_FILE, endpoint="https://intersight.com")
 
 compute = intersight.apis.ComputeApi(api_client=client)
+
+# A example with how to use keyword args of intersight api
+# Specifies the maximum number of resources to return in the response, refer to the source code of this function
 servers = compute.get_compute_physical_summary_list(top=300).results
 
 with open("servers.csv", "w", newline="") as csvfile:
@@ -24,6 +29,8 @@ with open("servers.csv", "w", newline="") as csvfile:
         #     print(s)
 
 
+
+### The following is a complete output example for a single server ###
 
 # {'account_moid': '59bc454c16267c000192f683',
 #  'admin_power_state': '',

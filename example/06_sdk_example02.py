@@ -1,6 +1,7 @@
 """
-Customized query with intersight api
-https://intersight.com/apidocs/introduction/query/
+    A minimal code example using the intersight python SDK
+    Customized query with intersight api
+    Author: Linlin Wang
 """
 import os
 import intersight.apis
@@ -13,7 +14,9 @@ client = intersight.authentication.get_api_client(api_key_id=API_KEY_ID, api_sec
 
 compute = intersight.apis.ComputeApi(api_client=client)
 
-# filter query
+# filter query, query the list of all servers in UCSM management mode
+# It is particularly important to note that the keywords("ManagementMode") in the filter here should follow the camel case style of the REST API, 
+# although the output of the Python SDK is in snake case("management_mode").
 params = dict(filter="ManagementMode eq 'UCSM'", top=300)
 servers = compute.get_compute_physical_summary_list(**params).results
 

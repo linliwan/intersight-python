@@ -14,9 +14,9 @@ import requests
 from xml.etree import ElementTree
 requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
-CIMC_IP = "192.168.17.8"
-USERNAME = "admin"
-PASSWORD = "admin"
+CIMC_IP = "<your_cimc_ip_address>"
+USERNAME = "<your_username>"
+PASSWORD = "<your_password>"
 
 login_url = f"https://{CIMC_IP}/nuova"
 device_connector_url = f"https://{CIMC_IP}/connector/DeviceConnections"

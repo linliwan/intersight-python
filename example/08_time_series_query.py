@@ -1,5 +1,5 @@
 """
-    使用intersight telemetry api查询服务器过去24小时的能源消耗情况
+    Use the Intersight Telemetry API to query the energy consumption of a specific server over the past 24 hours
     Author: Linlin Wang
 """
 
@@ -18,7 +18,7 @@ from intersight.model.telemetry_druid_aggregator import TelemetryDruidAggregator
 from intersight.model.telemetry_druid_expression_post_aggregator import TelemetryDruidExpressionPostAggregator
 from datetime import datetime, timedelta
 
-# 初始化 client
+# initial client
 client = intersight.authentication.get_api_client(
     api_key_id=os.getenv("METRIC_API_KEY_ID_V3"),
     api_secret_file=os.getenv("METRIC_API_PRIVATE_KEY_V3"),
@@ -28,18 +28,19 @@ client = intersight.authentication.get_api_client(
 compute = ComputeApi(api_client=client)
 telemetry = TelemetryApi(api_client=client)
 
-# 获取特定服务器的 MoID（通过序列号）
+# Get the MoID for a specific server (by serial number)
 server = compute.get_compute_blade_list(filter="Serial eq 'FCH264477D7'").results
 server_moid = server[0].moid
 server_dn = server[0].name
 print(f"Target server MoID: {server_moid}")
 
-# 时间范围设置
+# Time range settings
 now = datetime.now()
 start_time = now - timedelta(hours=24)
 interval = f"{start_time.strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3]}Z/{now.strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3]}Z"
 
-# 构造请求体, 在intersight GUI下生成query code，然后交给chatgpt协助转换
+# Construct the request body. 
+# You can generate the query code in the Intersight GUI and then give it to ChatGPT to assist in the conversion.
 req = TelemetryDruidTimeSeriesRequest(
     query_type="groupBy",
     data_source=TelemetryDruidTableDataSource(type="table", name="PhysicalEntities"),
@@ -100,10 +101,10 @@ req = TelemetryDruidTimeSeriesRequest(
         query_id="host_energy_query"
     )
 )
-# 运行查询
+# Run a query
 results = telemetry.query_telemetry_time_series(telemetry_druid_time_series_request=req)
 
-# 格式化输出
+# format output
 print(f"\nHourly Energy Consumption for server {server_dn} (past 24h):\n")
 print("{:<20} {:>15} {:>15} {:>15} {:>10}".format(
     "Timestamp", "Energy (kJ)", "Energy (Wh)", "Raw Energy", "Dur(s)"
