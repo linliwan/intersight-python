@@ -10,4 +10,5 @@ Before executing these test scripts, you need to
  - If you are using Linux or MacOS, you can install direnv to load these environment variables; 
  - If you are using Windows, you can try to use dotenv for instead.
 
-This is an unofficial community project for learning purposes. Not affiliated with Cisco.
+The example folder contains examples about how to quickly get started with Intersight Python SDK; 
+The tools folder contains some script tools for UCS.
